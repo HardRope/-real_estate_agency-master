@@ -8,10 +8,7 @@ def change_new_building(apps, schema_editor):
         if not flat.construction_year:
             continue
 
-        if flat.construction_year < 2015:
-            flat.new_building = False
-        else:
-            flat.new_building = True
+        flat.new_building = flat.construction_year < 2015
         flat.save()
 
 class Migration(migrations.Migration):

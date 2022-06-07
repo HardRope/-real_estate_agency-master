@@ -64,7 +64,7 @@ class Flat(models.Model):
         User,
         verbose_name='Кто лайкнул',
         blank=True,
-        related_name="user_likes")
+        related_name="likes")
 
     def __str__(self):
         return f'{self.town}, {self.address} ({self.price}р.)'
@@ -75,13 +75,13 @@ class Appeal(models.Model):
         User,
         on_delete=models.CASCADE,
         verbose_name='Кто жаловался',
-        related_name="user_appeals")
+        related_name="appeals")
 
     flat = models.ForeignKey(
         Flat,
         on_delete=models.CASCADE,
         verbose_name='Квартира, на которую пожаловались',
-        related_name="flat_appeals")
+        related_name="appeals")
 
     text = models.TextField('Текст жалобы')
 
@@ -94,7 +94,7 @@ class Owner(models.Model):
     flats = models.ManyToManyField(
         Flat,
         verbose_name='Квартиры в собственности',
-        related_name="flat_owners"
+        related_name="owners"
     )
 
     def __str__(self):

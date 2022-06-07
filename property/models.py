@@ -1,4 +1,3 @@
-from django import forms
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -7,8 +6,6 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Flat(models.Model):
-    # owner_name = forms.ModelMultipleChoiceField(queryset=Owner.objects.all(), required=True)
-
     created_at = models.DateTimeField(
         'Когда создано объявление',
         default=timezone.now,

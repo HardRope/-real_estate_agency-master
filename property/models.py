@@ -1,3 +1,4 @@
+from django import forms
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -6,13 +7,14 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Flat(models.Model):
+    # owner_name = forms.ModelMultipleChoiceField(queryset=Owner.objects.all(), required=True)
 
     created_at = models.DateTimeField(
         'Когда создано объявление',
         default=timezone.now,
         db_index=True)
 
-    new_building = models.NullBooleanField('Новостройка', default=None, db_index=True)
+    new_building = models.NullBooleanField('Новостройка', db_index=True)
 
     description = models.TextField('Текст объявления', blank=True)
 
@@ -87,7 +89,7 @@ class Appeal(models.Model):
 class Owner(models.Model):
     name = models.CharField('ФИО владельца', max_length=200, db_index=True)
 
-    owner_pure_phone = PhoneNumberField('Нормализованный номер владельца', blank=True)
+    owner_pure_phone = PhoneNumberField('Нормализованный номер владельца')
 
     flats = models.ManyToManyField(
         Flat,
